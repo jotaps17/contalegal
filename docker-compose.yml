@@ -1,0 +1,12 @@
+services:
+  contalegal:
+    build: .
+    container_name: contalegal
+    ports:
+      - "8501:8501"
+    volumes:
+      # Persiste o cache de índices BCB e o tjsp.csv entre reinicializações
+      - ./calculolegal/data:/app/calculolegal/data
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    restart: unless-stopped
